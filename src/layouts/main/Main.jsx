@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Movies from '../../components/movies/Movies';
+import Preloader from '../../components/preloader/Preloader';
 import style from './Main.module.css';
 
 class Main extends Component {
@@ -18,7 +19,7 @@ class Main extends Component {
     return (
       <div className={style.container}>
         {
-          movies.length === 0 ? <h1>Loader</h1> : <Movies movies={movies} />
+          movies.length === 0 ? <Preloader/> : <Movies movies={movies} />
         }
       </div>
     )
