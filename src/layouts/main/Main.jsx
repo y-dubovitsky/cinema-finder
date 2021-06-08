@@ -10,16 +10,23 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const response = fetch('http://www.omdbapi.com/?apikey=641f3ad9&s=Matrix')
-    .then(data => data.json())
-    .then(data => this.setState({movies: data.Search}));
+    this.getData();
+  }
+
+  getData = async (filmName = 'Matrix') => {
+    const response = await fetch(`http://www.omdbapi.com/?apikey=641f3ad9&s=${filmName}`);
+    const json = await response.json();
+    
+    this.setState({
+      movies: json.Search
+    })
   }
 
   render() {
     const { movies } = this.state;
     return (
       <div className={style.container}>
-        <Search/>
+        <Search getData={this.getData}/>
         {
           movies.length === 0 ? <Preloader/> : <Movies movies={movies} />
         }
