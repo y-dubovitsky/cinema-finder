@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Movies from '../../components/movies/Movies';
 import Preloader from '../../components/preloader/Preloader';
+import Search from '../../components/search/Search';
 import style from './Main.module.css';
 
 class Main extends Component {
@@ -18,6 +19,7 @@ class Main extends Component {
     const { movies } = this.state;
     return (
       <div className={style.container}>
+        <Search/>
         {
           movies.length === 0 ? <Preloader/> : <Movies movies={movies} />
         }
