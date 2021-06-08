@@ -7,7 +7,15 @@ class Search extends Component {
   }
 
   state = {
-    search: ''
+    search: '',
+    type: ''
+  }
+
+  setFilmType = (event) => {
+    const input = event.target.closest('input');
+    if(input) {
+      this.setState({type: input.value})
+    }
   }
 
   render() {
@@ -23,10 +31,24 @@ class Search extends Component {
             onChange={(event) => this.setState({ search: event.target.value })}
             onKeyDown={(event) => {
               if (event.code === 'Enter') {
-                getData(this.state.search)
+                getData(this.state.search, this.state.type)
               }
             }}
           />
+        </div>
+        <div id="radios" onClick={this.setFilmType}>
+          <label>
+            <input class="with-gap" name="type" type="radio" value=""/>
+            <span>All</span>
+          </label>
+          <label>
+            <input class="with-gap" name="type" type="radio" value="movie"/>
+            <span>Movies</span>
+          </label>
+          <label>
+            <input class="with-gap" name="type" type="radio" value="series"/>
+            <span>Series</span>
+          </label>
         </div>
       </div>
     )

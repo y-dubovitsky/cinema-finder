@@ -6,17 +6,18 @@ import style from './Main.module.css';
 
 class Main extends Component {
   state = {
-    movies: []
+    movies: [],
+    filter: ''
   }
 
   componentDidMount() {
     this.getData();
   }
 
-  getData = async (filmName = 'Matrix') => {
-    const response = await fetch(`http://www.omdbapi.com/?apikey=641f3ad9&s=${filmName}`);
+  getData = async (filmName = 'Matrix', filter = '') => {
+    const response = await fetch(`http://www.omdbapi.com/?apikey=641f3ad9&s=${filmName}&type=${filter}`);
     const json = await response.json();
-    
+
     this.setState({
       movies: json.Search
     })
