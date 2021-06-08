@@ -4,6 +4,8 @@ import Preloader from '../../components/preloader/Preloader';
 import Search from '../../components/search/Search';
 import style from './Main.module.css';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class Main extends Component {
   state = {
     movies: [],
@@ -17,8 +19,8 @@ class Main extends Component {
 
   getData = async (filmName = 'Matrix', filter = '') => {
     this.setState({loading: true});
-    
-    const response = await fetch(`http://www.omdbapi.com/?apikey=641f3ad9&s=${filmName}&type=${filter}`);
+
+    const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${filmName}&type=${filter}`);
     const json = await response.json();
 
     this.setState({
