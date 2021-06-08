@@ -2,13 +2,13 @@ import Movie from './movie/Movie';
 import style from './Movies.module.css';
 
 function Movies(props) {
-  const { movies } = props;
+  const { movies = []} = props;
 
   return (
     <div className={style.movies}>
-      {movies.map(movie => {
+      {movies.length ? movies.map(movie => {
         return <Movie key={movie.imdbID} {...movie} />
-      })}
+      }) : 'There is nothing'}
     </div>
   )
 }

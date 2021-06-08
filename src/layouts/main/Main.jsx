@@ -7,7 +7,8 @@ import style from './Main.module.css';
 class Main extends Component {
   state = {
     movies: [],
-    filter: ''
+    filter: '',
+    loading: true
   }
 
   componentDidMount() {
@@ -15,21 +16,25 @@ class Main extends Component {
   }
 
   getData = async (filmName = 'Matrix', filter = '') => {
+    this.setState({loading: true});
+    
     const response = await fetch(`http://www.omdbapi.com/?apikey=641f3ad9&s=${filmName}&type=${filter}`);
     const json = await response.json();
 
     this.setState({
-      movies: json.Search
+      movies: json.Search,
+      loading: false
     })
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
+
     return (
       <div className={style.container}>
-        <Search getData={this.getData}/>
+        <Search getData={this.getData} />
         {
-          movies.length === 0 ? <Preloader/> : <Movies movies={movies} />
+          loading === true ? <Preloader /> : <Movies movies={movies} />
         }
       </div>
     )
